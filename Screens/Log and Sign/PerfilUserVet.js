@@ -145,7 +145,7 @@ const PerfilUserVet = ({ navigation }) => {
           </View>
 
           <Button
-            onPress={() => navigation.navigate('VetList')}
+            onPress={() => navigation.navigate('Chats')}
             title="Confirmar"
             filled
             style={{

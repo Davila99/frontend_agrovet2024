@@ -1,19 +1,32 @@
-import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, TextInput } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import * as ImagePicker from 'expo-image-picker';
-import COLORS from '../../Constants/Colors';
-import Button from '../../Components/Button';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+  TextInput,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import * as ImagePicker from "expo-image-picker";
+import COLORS from "../../Constants/Colors";
+import Button from "../../Components/Button";
 
 const PerfilUserVet = ({ navigation }) => {
-  const [imageUri, setImageUri] = useState(require('../../assets/ImagePerfil.jpg'))
-  const [cameraUri, setCameraUri] = useState(require('../../assets/camera.jpg'));
+  const [imageUri, setImageUri] = useState(
+    require("../../assets/ImagePerfil.jpg")
+  );
+  const [cameraUri, setCameraUri] = useState(
+    require("../../assets/camera.jpg")
+  );
 
   const handlePress = async () => {
-    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    const permissionResult =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
 
     if (permissionResult.granted === false) {
-      alert('Se requieren permisos para acceder a la galería de imágenes.');
+      alert("Se requieren permisos para acceder a la galería de imágenes.");
       return;
     }
 
@@ -21,7 +34,10 @@ const PerfilUserVet = ({ navigation }) => {
 
     if (!result.canceled) {
       // Selecciona la nueva imagen y la coloca sobre la original
-      const selectedImageUri = result.assets && result.assets.length > 0 ? { uri: result.assets[0].uri } : { uri: result.uri };
+      const selectedImageUri =
+        result.assets && result.assets.length > 0
+          ? { uri: result.assets[0].uri }
+          : { uri: result.uri };
       setImageUri(selectedImageUri);
     }
   };
@@ -34,7 +50,7 @@ const PerfilUserVet = ({ navigation }) => {
             <Text
               style={{
                 fontSize: 25,
-                fontWeight: 'bold',
+                fontWeight: "bold",
                 marginVertical: 12,
                 color: COLORS.blue,
               }}
@@ -65,7 +81,7 @@ const PerfilUserVet = ({ navigation }) => {
             <Text
               style={{
                 fontSize: 16,
-                fontWeight: '400',
+                fontWeight: "400",
                 marginVertical: 8,
               }}
             >
@@ -74,13 +90,13 @@ const PerfilUserVet = ({ navigation }) => {
 
             <View
               style={{
-                width: '100%',
+                width: "100%",
                 height: 48,
                 borderColor: COLORS.black,
                 borderWidth: 1,
                 borderRadius: 8,
-                alignItems: 'center',
-                justifyContent: 'center',
+                alignItems: "center",
+                justifyContent: "center",
                 paddingLeft: 22,
               }}
             >
@@ -89,7 +105,7 @@ const PerfilUserVet = ({ navigation }) => {
                 placeholderTextColor={COLORS.black}
                 keyboardType="email-address"
                 style={{
-                  width: '100%',
+                  width: "100%",
                 }}
               />
             </View>
@@ -99,7 +115,7 @@ const PerfilUserVet = ({ navigation }) => {
             <Text
               style={{
                 fontSize: 16,
-                fontWeight: '400',
+                fontWeight: "400",
                 marginVertical: 8,
               }}
             >
@@ -108,44 +124,67 @@ const PerfilUserVet = ({ navigation }) => {
 
             <View
               style={{
-                width: '100%',
+                width: "100%",
                 height: 48,
                 borderColor: COLORS.black,
                 borderWidth: 1,
                 borderRadius: 8,
-                alignItems: 'center',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
+                alignItems: "center",
+                flexDirection: "row",
+                justifyContent: "space-between",
                 paddingLeft: 22,
               }}
             >
               <TextInput
                 placeholder="Ingresa los años de experiencia"
-                keyboardType='numeric'
+                keyboardType="numeric"
                 placeholderTextColor={COLORS.black}
                 style={{
-                  width: '100%',
+                  width: "100%",
                 }}
               />
             </View>
           </View>
 
           <View style={{ marginBottom: 12 }}>
-            <TouchableOpacity onPress={() => navigation.navigate('Works')}>
-            <Text
-              style={{
-                fontSize: 16,
-                fontWeight: '400',
-                marginVertical: 8,
-              }}
-            >
-            Trabajos realizados
-            </Text>
+            <TouchableOpacity onPress={() => navigation.navigate("Works")}>
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontWeight: "400",
+                  marginVertical: 8,
+                }}
+              >
+                Trabajos realizados
+              </Text>
+              <View
+                style={{
+                  width: "100%",
+                  height: 48,
+                  borderColor: COLORS.black,
+                  borderWidth: 1,
+                  borderRadius: 8,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  paddingLeft: 22,
+                }}
+              >
+                <TextInput
+                  placeholder="Trabajos realizados"
+                  placeholderTextColor={COLORS.black}
+                  keyboardType="email-address"
+                  style={{
+                    width: "100%",
+                  }}
+                />
+              </View>
             </TouchableOpacity>
           </View>
 
           <Button
-            onPress={() => navigation.navigate('Chats')}
+
+            onPress={() => navigation.navigate("VetList")}
+
             title="Confirmar"
             filled
             style={{
@@ -157,15 +196,15 @@ const PerfilUserVet = ({ navigation }) => {
 
           <View
             style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
+              flexDirection: "row",
+              justifyContent: "center",
             }}
           ></View>
 
           <View
             style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
+              flexDirection: "row",
+              justifyContent: "center",
               marginVertical: 22,
             }}
           ></View>
@@ -177,28 +216,28 @@ const PerfilUserVet = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   touchableContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
     padding: 10,
     borderRadius: 5,
   },
   imageContainer: {
-    position: 'relative',
-    alignContent: 'center',
+    position: "relative",
+    alignContent: "center",
   },
   circularImage: {
     width: 200,
     height: 200,
     borderColor: COLORS.black,
     borderRadius: 100.5,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   cameraImage: {
-    position: 'absolute',
+    position: "absolute",
     width: 200 / 5,
     height: 200 / 5,
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: "black",
     borderRadius: 100.5 / 5,
     bottom: 0,
     right: 0,

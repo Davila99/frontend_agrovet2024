@@ -37,6 +37,9 @@ export default function App() {
           component={Agronomos}
           options={{
             title: "Agrónomos",
+            tabBarLabelStyle: {
+              fontSize: 14,
+            },
             tabBarIcon: ({ focused }) => (
               <Image
                 source={IMAGES.AGRONOMOS}
@@ -55,6 +58,9 @@ export default function App() {
           component={Veterinarios}
           options={{
             title: "Veterinarios",
+            tabBarLabelStyle: {
+              fontSize: 14,
+            },
             tabBarIcon: ({ focused }) => (
               <Image
                 source={IMAGES.VETERINARIO}
@@ -65,6 +71,8 @@ export default function App() {
                 }}
               />
             ),
+            tabBarActiveTintColor: COLORS.blue,
+            tabBarInactiveTintColor: COLORS.black,
           }}
         />
         <Tab.Screen
@@ -72,6 +80,9 @@ export default function App() {
           component={HomeScreen}
           options={{
             title: "Home",
+            tabBarLabelStyle: {
+              fontSize: 14,
+            },
             tabBarIcon: ({ focused }) => (
               <Image
                 source={IMAGES.HOME}
@@ -82,6 +93,8 @@ export default function App() {
                 }}
               />
             ),
+            tabBarActiveTintColor: COLORS.blue,
+            tabBarInactiveTintColor: COLORS.black,
           }}
         />
         <Tab.Screen
@@ -89,6 +102,9 @@ export default function App() {
           component={Anuncios}
           options={{
             title: "Anuncios",
+            tabBarLabelStyle: {
+              fontSize: 14,
+            },
             tabBarIcon: ({ focused }) => (
               <Image
                 source={IMAGES.ANUNCIO}
@@ -99,6 +115,8 @@ export default function App() {
                 }}
               />
             ),
+            tabBarActiveTintColor: COLORS.blue,
+            tabBarInactiveTintColor: COLORS.black,
           }}
         />
         <Tab.Screen
@@ -106,6 +124,9 @@ export default function App() {
           component={Chats}
           options={{
             title: "Chats",
+            tabBarLabelStyle: {
+              fontSize: 14,
+            },
             tabBarIcon: ({ focused }) => (
               <Image
                 source={IMAGES.CHAT}
@@ -116,6 +137,8 @@ export default function App() {
                 }}
               />
             ),
+            tabBarActiveTintColor: COLORS.blue,
+            tabBarInactiveTintColor: COLORS.black,
           }}
         />
       </Tab.Navigator>

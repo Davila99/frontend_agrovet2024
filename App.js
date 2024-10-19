@@ -1,10 +1,18 @@
+import "./gesture-handler";
 import React from "react";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Image } from "react-native";
 import COLORS from "./Constants/Colors";
+
+import { View, Text } from "react-native";
+
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+} from "@react-navigation/drawer";
 
 import {
   Login,
@@ -25,9 +33,23 @@ import IMAGES from "./Constants/Img";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 export default function App() {
-  // Chats Veterinarios Agronomos Anuncios
+  const HomeScreenWithDrawer = () => {
+    return (
+      <Drawer.Navigator
+        initialRouteName="HomeScreen"
+        drawerContent={() => (
+          <DrawerContentScrollView>
+            <Text>Drawer Content</Text>
+          </DrawerContentScrollView>
+        )}
+      >
+        <Drawer.Screen name="HomeScreen" component={HomeScreen} />
+      </Drawer.Navigator>
+    );
+  };
 
   const TabNavigator = () => {
     return (
@@ -36,6 +58,7 @@ export default function App() {
           name="Agronomos"
           component={Agronomos}
           options={{
+            headerShown: false,
             title: "Agrónomos",
             tabBarLabelStyle: {
               fontSize: 14,
@@ -77,8 +100,9 @@ export default function App() {
         />
         <Tab.Screen
           name="Home"
-          component={HomeScreen}
+          component={HomeScreenWithDrawer}
           options={{
+            headerShown: false,
             title: "Home",
             tabBarLabelStyle: {
               fontSize: 14,
@@ -101,6 +125,7 @@ export default function App() {
           name="Anuncios"
           component={Anuncios}
           options={{
+            headerShown: false,
             title: "Anuncios",
             tabBarLabelStyle: {
               fontSize: 14,
@@ -134,6 +159,7 @@ export default function App() {
                   height: 30,
                   width: 30,
                   tintColor: focused ? COLORS.blue : COLORS.lightPrimary,
+                  headerShown: false,
                 }}
               />
             ),

@@ -15,34 +15,18 @@ const ChatsScreen = () => {
     setIsLoading(true);
     setErrorMessage(''); // Reiniciar mensaje de error
     try {
-      const response = await fetch('https://api.wit.ai/message', {
-        method: 'GET',
+      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
         headers: {
-          'Authorization': `Bearer YOUR_WIT_AI_ACCESS_TOKEN`, // Reemplaza con tu token de acceso de Wit.ai
           'Content-Type': 'application/json',
+          'Authorization': `Bearer YOUR_API_KEY`, // Reemplazar con tu API_KEY
         },
-        // Se pasa el query como un parámetro en la URL
-        // Aquí se está haciendo la solicitud GET para que Wit.ai interprete la consulta
-        qs: { q: query },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo", // o el modelo que estés usando
+          messages: [{ role: "user", content: query }],
+          max_tokens: 100,
+        }),
       });
-  
-      const data = await response.json();
-  
-      if (data && data.entities) {
-        // Procesa la respuesta según la estructura de tus intents y entities
-        // Por ejemplo, podrías extraer la respuesta o la intención del usuario
-        return `Entendí que quieres hablar sobre: ${JSON.stringify(data.entities)}`;
-      }
-      return 'Lo siento, no obtuve una respuesta válida.';
-    } catch (error) {
-      console.error('Error al obtener respuesta de Wit.ai:', error);
-      setErrorMessage('Lo siento, algo salió mal. Inténtalo de nuevo más tarde.'); // Actualizar mensaje de error
-      return null; // Asegúrate de retornar null en caso de error
-    } finally {
-      setIsLoading(false);
-    }
-  };
-  
 
       const data = await response.json();
       if (data.choices && data.choices.length > 0) {

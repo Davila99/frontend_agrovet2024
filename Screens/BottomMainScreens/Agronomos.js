@@ -9,10 +9,12 @@ import {
   Modal,
   Button,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const Agronomos = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedAgronomist, setSelectedAgronomist] = useState(null);
+  const navigation = useNavigation();
 
   // Lista de agrónomos de ejemplo
   const agronomos = [
@@ -133,7 +135,27 @@ const Agronomos = () => {
               <Text style={styles.modalText}>
                 Likes: {selectedAgronomist.likes}
               </Text>
-              <Button title="Cerrar" onPress={() => setModalVisible(false)} />
+
+              {/* Contenedor para los botones en fila */}
+              <View style={styles.buttonRow}>
+                <View style={styles.buttonContainer}>
+                  <Button
+                    title="Cerrar"
+                    onPress={() => setModalVisible(false)}
+                  />
+                </View>
+                <View style={styles.buttonContainer}>
+                  <Button
+                    title="Enviar mensaje"
+                    onPress={() =>
+                      navigation.navigate("EnviarMensaje", {
+                        agronomistId: selectedAgronomist.id,
+                        agronomistName: selectedAgronomist.name,
+                      })
+                    }
+                  />
+                </View>
+              </View>
             </View>
           </View>
         </Modal>
@@ -235,6 +257,16 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 5,
     textAlign: "center",
+  },
+  buttonRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 20,
+    width: "100%",
+  },
+  buttonContainer: {
+    flex: 1,
+    marginHorizontal: 10,
   },
 });
 

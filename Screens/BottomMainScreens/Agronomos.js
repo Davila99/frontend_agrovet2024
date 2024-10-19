@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#eaeaea",
+    paddingTop:20
   },
   agronomistContainer: {
     flexDirection: "row",

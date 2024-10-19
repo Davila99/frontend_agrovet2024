@@ -46,7 +46,7 @@ const Veterinarios = () => {
     }
     ,
     {
-      id: '3',
+      id: '5',
       name: 'Dr. Carlos García',
       specialty: 'Veterinaria de grandes animales',
       location: 'León',
@@ -56,7 +56,7 @@ const Veterinarios = () => {
       image: 'https://scontent-mia3-1.xx.fbcdn.net/v/t39.30808-6/278342294_1160176291403780_4455004864145461318_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_ohc=3mLgXQP4DWUQ7kNvgEWRbQC&_nc_zt=23&_nc_ht=scontent-mia3-1.xx&_nc_gid=Am2bJK0EftWO4HTHs1ngBwt&oh=00_AYAyu-HmXo1FeWiWII0FSIwUTmhCjMp4WtCZM4Ru6xiWhA&oe=67191248',
     },
     {
-      id: '4',
+      id: '6',
       name: 'Dra. Ana Fernández',
       specialty: 'Dermatología veterinaria',
       location: 'Masaya',

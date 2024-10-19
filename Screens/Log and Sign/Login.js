@@ -30,8 +30,21 @@ const Login = ({ navigation }) => {
   };
 
   const handleLogin = async () => {
-    navigation.navigate("PerfilUser"); // Redirige a la pantalla de perfil
+    const credentials = {
+      phoneNumber, // Asegúrate de que este valor sea válido según tus reglas
+      password,
+    };
+  
+    try {
+      const response = await loginUser(credentials); // Llama a la función
+      console.log('Inicio de sesión exitoso:', response);
+      navigation.navigate("PerfilUser"); // Redirige a la pantalla de perfil
+    } catch (error) {
+      setErrorMessage(error); // Maneja el error
+      console.error('Error al iniciar sesión:', error);
+    }
   };
+  
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.containerImage}>

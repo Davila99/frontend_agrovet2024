@@ -19,11 +19,11 @@ export const registerUser = async (userData) => {
 // Nueva función para iniciar sesión
 export const loginUser = async (credentials) => {
   try {
-    const response = await api.post("/auth/private", credentials);
+    const response = await api.post("/auth/login", credentials);
     return response.data;
   } catch (error) {
     throw error.response ? error.response.data : error.message;
   }
 };
-
+ 
 export default api;

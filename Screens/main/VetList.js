@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, Modal, StyleSheet, FlatList } from "react-native";
+import React, { useEffect } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
 import COLORS from "../../Constants/Colors";
-import { Manager } from 'socket.io-client';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import { useNavigation } from '@react-navigation/native'; // Importa useNavigation
+import fonts from "../../config/fonts";
+import { getChats } from "../../api";
+import {Manager} from 'socket.io-client'
 
 const VetList = () => {
-  const navigation = useNavigation(); // Obtén el objeto de navegación
-  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
-    const ws = new Manager('http://192.168.4.40:3000/socket.io/socket.io.js');
+    const ws= new Manager('http://192.168.4.40:3000/socket.io/socket.io.js')
 
-    const socket = ws.socket('/');
-
+    const socket=ws.socket('/')
+    
+    //const ws = new WebSocket("http://192.168.42.250:3000/");
     ws.onopen = () => {
       console.log("Conexión establecida");
     };
 
     ws.onmessage = (e) => {
       console.log("Mensaje recibido:", e.data);
+      // Manejar el mensaje recibido, por ejemplo, actualizar el estado de tu aplicación
     };
 
     ws.onerror = (error) => {
@@ -30,65 +30,80 @@ const VetList = () => {
       console.log("Conexión cerrada");
     };
 
+    // Retorno de efecto para limpiar al desmontar el componente
     return () => {
       ws.close();
     };
   }, []);
 
-  // Opciones del menú con iconos
-  const menuOptions = [
-    { label: 'Chats', action: () => navigation.navigate("ChatsScreen"), icon: "chat" },
-    { label: 'Veterinarios', action: () => navigation.navigate("Veterinarians"), icon: "local-hospital" },
-    { label: 'Agrónomos', action: () => navigation.navigate("Agronomists"), icon: "grass" },
-    { label: 'Anuncios', action: () => console.log("Anuncios seleccionado"), icon: "announcement" },
-    { label: 'Notific.', action: () => console.log("Notific. seleccionado"), icon: "notifications" },
-    { label: 'Config.', action: () => console.log("Config. seleccionado"), icon: "settings" },
-  ];
-
-  const renderItem = ({ item }) => (
-    <TouchableOpacity
-      style={styles.menuItem}
-      onPress={() => {
-        item.action();
-        setModalVisible(false); // Cierra el modal al seleccionar una opción
-      }}
-    >
-      <Icon name={item.icon} size={24} color={COLORS.blue} style={styles.icon} />
-      <Text style={styles.menuItemText}>{item.label}</Text>
-    </TouchableOpacity>
-  );
+  
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.welcomeButton}>
-          <Text style={styles.welcomeText}>Agrovet</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setModalVisible(true)}>
-          <Text style={styles.dropdownText}>Menú</Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* Modal para el Menú Desplegable */}
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
+    <View
+      style={{
+        fontWeight: "bold",
+        backgroundColor: COLORS.blue,
+        paddingBottom: 40,
+        paddingTop: 1,
+      }}
+    >
+      <View
+        style={{
+          backgroundColor: COLORS.blue,
+          height: 70,
+          justifyContent: "space-between",
+          marginBottom: 10,
+        }}
       >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalView}>
-            <FlatList
-              data={menuOptions}
-              renderItem={renderItem}
-              keyExtractor={(item) => item.label}
-            />
-            <TouchableOpacity onPress={() => setModalVisible(false)}>
-              <Text style={styles.closeText}>Cerrar</Text>
-            </TouchableOpacity>
-          </View>
+        <TouchableOpacity
+          style={{
+            marginTop: 20,
+            justifyContent: "flex-start",
+            marginBotton: 30,
+          }}
+        >
+          <Text
+            style={{
+              paddingLeft: 10,
+              fontWeight: "bold",
+              color: "white",
+              fontSize: 25,
+              marginLeft: 10,
+              width: "100",
+              margin: 10,
+              textAlign: "left",
+            }}
+          >
+            Welcome
+          </Text>
+        </TouchableOpacity>
+        <View
+          style={{
+            marginTop: 20,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            width: "40%",
+            paddingBottom: 20,
+            paddingHorizontal: 2,
+          }}
+        >
+          <TouchableOpacity style={{ paddingHorizontal: 16 }}>
+            <Text style={{ color: "white", fontSize: 16 }}>Chats</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={{ paddingHorizontal: 16 }}>
+            <Text style={{ color: "white", fontSize: 16 }}>Vets.</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={{ paddingHorizontal: 16 }}>
+            <Text style={{ color: "white", fontSize: 16 }}>Anuncios</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={{ paddingHorizontal: 16 }}>
+            <Text style={{ color: "white", fontSize: 16 }}>Notific.</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={{ paddingHorizontal: 16 }}>
+            <Text style={{ color: "white", fontSize: 16 }}>Config.</Text>
+          </TouchableOpacity>
         </View>
-      </Modal>
+      </View>
     </View>
   );
 };

@@ -60,6 +60,7 @@ const Veterinarios = () => {
       name: "Dr. Carlos García",
       specialty: "Veterinaria de grandes animales",
       location: "León",
+
       experience: 8,
       consultations: 100,
       likes: 90,
@@ -71,6 +72,7 @@ const Veterinarios = () => {
       name: "Dra. Ana Fernández",
       specialty: "Dermatología veterinaria",
       location: "Masaya",
+
       experience: 3,
       consultations: 75,
       likes: 60,

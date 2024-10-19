@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Modal, StyleSheet, FlatList } from "react-native";
 import COLORS from "../../Constants/Colors";
+<<<<<<< Updated upstream
 import { Manager } from 'socket.io-client';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native'; // Importa useNavigation
@@ -14,6 +15,19 @@ const VetList = () => {
 
     const socket = ws.socket('/');
 
+=======
+import fonts from "../../config/fonts";
+import { getChats } from "../../api";
+import { Manager } from "socket.io-client";
+
+const VetList = () => {
+  useEffect(() => {
+    const ws = new Manager("http://192.168.4.40:3000/socket.io/socket.io.js");
+
+    const socket = ws.socket("/");
+
+    //const ws = new WebSocket("http://192.168.42.250:3000/");
+>>>>>>> Stashed changes
     ws.onopen = () => {
       console.log("Conexión establecida");
     };
@@ -35,6 +49,7 @@ const VetList = () => {
     };
   }, []);
 
+<<<<<<< Updated upstream
   // Opciones del menú con iconos
   const menuOptions = [
     { label: 'Chats', action: () => navigation.navigate("ChatsScreen"), icon: "chat" },
@@ -89,6 +104,11 @@ const VetList = () => {
           </View>
         </View>
       </Modal>
+=======
+  return (
+    <View>
+      <Text>Hola</Text>
+>>>>>>> Stashed changes
     </View>
   );
 };

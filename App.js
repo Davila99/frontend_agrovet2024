@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Image } from "react-native";
+import COLORS from "./Constants/Colors";
 
 import {
   Login,
@@ -39,7 +40,11 @@ export default function App() {
             tabBarIcon: ({ focused }) => (
               <Image
                 source={IMAGES.AGRONOMOS}
-                style={{ height: 30, width: 30 }}
+                style={{
+                  height: 30,
+                  width: 30,
+                  tintColor: focused ? COLORS.blue : COLORS.lightPrimary,
+                }}
               />
             ),
           }}
@@ -53,7 +58,11 @@ export default function App() {
             tabBarIcon: ({ focused }) => (
               <Image
                 source={IMAGES.VETERINARIO}
-                style={{ height: 30, width: 30 }}
+                style={{
+                  height: 30,
+                  width: 30,
+                  tintColor: focused ? COLORS.blue : COLORS.lightPrimary,
+                }}
               />
             ),
           }}
@@ -64,7 +73,14 @@ export default function App() {
           options={{
             title: "Home",
             tabBarIcon: ({ focused }) => (
-              <Image source={IMAGES.HOME} style={{ height: 30, width: 30 }} />
+              <Image
+                source={IMAGES.HOME}
+                style={{
+                  height: 30,
+                  width: 30,
+                  tintColor: focused ? COLORS.blue : COLORS.lightPrimary,
+                }}
+              />
             ),
           }}
         />
@@ -76,7 +92,11 @@ export default function App() {
             tabBarIcon: ({ focused }) => (
               <Image
                 source={IMAGES.ANUNCIO}
-                style={{ height: 30, width: 30 }}
+                style={{
+                  height: 30,
+                  width: 30,
+                  tintColor: focused ? COLORS.blue : COLORS.lightPrimary,
+                }}
               />
             ),
           }}
@@ -87,13 +107,21 @@ export default function App() {
           options={{
             title: "Chats",
             tabBarIcon: ({ focused }) => (
-              <Image source={IMAGES.CHAT} style={{ height: 30, width: 30 }} />
+              <Image
+                source={IMAGES.CHAT}
+                style={{
+                  height: 30,
+                  width: 30,
+                  tintColor: focused ? COLORS.blue : COLORS.lightPrimary,
+                }}
+              />
             ),
           }}
         />
       </Tab.Navigator>
     );
   };
+
   return (
     <>
       <NavigationContainer>

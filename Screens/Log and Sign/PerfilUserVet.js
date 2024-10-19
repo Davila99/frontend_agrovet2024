@@ -182,7 +182,9 @@ const PerfilUserVet = ({ navigation }) => {
           </View>
 
           <Button
+
             onPress={() => navigation.navigate("VetList")}
+
             title="Confirmar"
             filled
             style={{

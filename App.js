@@ -22,6 +22,7 @@ import {
   PerfilUser,
   VetList,
   Works,
+  ChatsScreen
 } from "./Screens/Index";
 
 // Bottom Tab Imports
@@ -242,6 +243,13 @@ export default function App() {
         <Stack.Screen
           name="Works"
           component={Works}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name="ChatsScreen"
+          component={ChatsScreen}
           options={{
             headerShown: false,
           }}

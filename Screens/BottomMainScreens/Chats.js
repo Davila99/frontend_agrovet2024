@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; // Necesitarás instalar @expo/vector-icons si no lo tienes
 
-const Chats = () => {
+const Chats = ({ navigation }) => {
   const contacts = [
     { id: '1', name: 'Juan Pérez', phone: '123-456-7890', image: 'https://scontent-mia3-1.xx.fbcdn.net/v/t39.30808-6/450846346_1654253561993956_5392783358307727618_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=2R90LnugY8sQ7kNvgF8ISew&_nc_zt=23&_nc_ht=scontent-mia3-1.xx&_nc_gid=AJ8XrFYSuu2i3EsieT9SQNP&oh=00_AYDOZ_DbV87PiuzunCJmBuAs8wm3JQrAPqDzkX3uxvrBCQ&oe=6718F2AF' },
     { id: '2', name: 'María López', phone: '234-567-8901', image: 'https://scontent-mia3-2.xx.fbcdn.net/v/t39.30808-6/272412038_1802788383264301_2171061510320588778_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=Cgc0XwgA-bcQ7kNvgF21jjJ&_nc_zt=23&_nc_ht=scontent-mia3-2.xx&_nc_gid=AAloJ4Trspivm200xNK0PaU&oh=00_AYC5fYPVdeMiHo_aUGenTStXXqN7tCLW1He3UEjV6Opo3Q&oe=6718DC4D' },
@@ -11,8 +11,7 @@ const Chats = () => {
   ];
 
   const handleForward = (contact) => {
-    // Aquí puedes manejar el reenviar el contacto a un evento
-    console.log(`Reenviando contacto: ${contact.name}`);
+    navigation.navigate("ChatsScreen");
   };
 
   const renderItem = ({ item }) => (

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,9 +6,14 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
+  Modal,
+  Button,
 } from "react-native";
 
 const Agronomos = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedAgronomist, setSelectedAgronomist] = useState(null);
+
   // Lista de agrónomos de ejemplo
   const agronomos = [
     {
@@ -17,8 +22,8 @@ const Agronomos = () => {
       specialty: "Agronomía de cultivos",
       location: "Managua",
       experience: 5,
-      consultations: 150, // Cantidad de consultas atendidas
-      likes: 120, // Cantidad de likes
+      consultations: 150,
+      likes: 120,
       image:
         "https://icones.pro/wp-content/uploads/2022/07/icones-d-administration-orange.png",
     },
@@ -55,21 +60,16 @@ const Agronomos = () => {
       image:
         "https://scontent-mia3-1.xx.fbcdn.net/v/t39.30808-6/278342294_1160176291403780_4455004864145461318_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_ohc=3mLgXQP4DWUQ7kNvgEWRbQC&_nc_zt=23&_nc_ht=scontent-mia3-1.xx&_nc_gid=Am2bJK0EftWO4HTHs1ngBwt&oh=00_AYAyu-HmXo1FeWiWII0FSIwUTmhCjMp4WtCZM4Ru6xiWhA&oe=67191248",
     },
-    {
-      id: "5",
-      name: "Ing. Carlos García",
-      specialty: "Sistemas de riego",
-      location: "León",
-      experience: 8,
-      consultations: 100,
-      likes: 90,
-      image:
-        "https://scontent-mia3-1.xx.fbcdn.net/v/t39.30808-6/431667393_1109506166917942_8904079740543941874_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=OzKvr1mdVA4Q7kNvgEQjll1&_nc_zt=23&_nc_ht=scontent-mia3-1.xx&_nc_gid=ANLk09B4Sy6HM3smwC7cyOm&oh=00_AYAk2dX0Bnl5gHSePjAhPN7ci0QqkJwY4tgom1x1zmFZLw&oe=6718D654",
-    },
   ];
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity style={styles.agronomistContainer}>
+    <TouchableOpacity
+      style={styles.agronomistContainer}
+      onPress={() => {
+        setSelectedAgronomist(item);
+        setModalVisible(true);
+      }}
+    >
       <Image source={{ uri: item.image }} style={styles.agronomistImage} />
       <View style={styles.agronomistInfo}>
         <Text style={styles.agronomistName}>{item.name}</Text>
@@ -82,7 +82,6 @@ const Agronomos = () => {
         </Text>
       </View>
 
-      {/* Nueva sección para consultas y likes en columnas paralelas */}
       <View style={styles.statsContainer}>
         <View style={styles.statsColumn}>
           <Text style={styles.statsText}>
@@ -103,6 +102,42 @@ const Agronomos = () => {
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />
+
+      {/* Modal para mostrar información detallada */}
+      {selectedAgronomist && (
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => setModalVisible(false)}
+        >
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <Image
+                source={{ uri: selectedAgronomist.image }}
+                style={styles.modalImage}
+              />
+              <Text style={styles.modalTitle}>{selectedAgronomist.name}</Text>
+              <Text style={styles.modalText}>
+                Especialidad: {selectedAgronomist.specialty}
+              </Text>
+              <Text style={styles.modalText}>
+                Ubicación: {selectedAgronomist.location}
+              </Text>
+              <Text style={styles.modalText}>
+                Años de experiencia: {selectedAgronomist.experience}
+              </Text>
+              <Text style={styles.modalText}>
+                Consultas atendidas: {selectedAgronomist.consultations}
+              </Text>
+              <Text style={styles.modalText}>
+                Likes: {selectedAgronomist.likes}
+              </Text>
+              <Button title="Cerrar" onPress={() => setModalVisible(false)} />
+            </View>
+          </View>
+        </Modal>
+      )}
     </View>
   );
 };
@@ -161,16 +196,45 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginLeft: 10, // Espacio entre la info del agrónomo y las estadísticas
-    flex: 1, // Para permitir que ocupe el espacio disponible
+    marginLeft: 10,
+    flex: 1,
   },
   statsColumn: {
-    flex: 1, // Cada columna ocupa un espacio igual
-    alignItems: "flex-end", // Alinear el texto a la derecha
+    flex: 1,
+    alignItems: "flex-end",
   },
   statsText: {
     fontSize: 12,
     color: "#555",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
+    backgroundColor: "white",
+    padding: 20,
+    borderRadius: 10,
+    alignItems: "center",
+    width: 300,
+  },
+  modalImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 15,
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+  modalText: {
+    fontSize: 14,
+    marginBottom: 5,
+    textAlign: "center",
   },
 });
 

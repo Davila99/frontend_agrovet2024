@@ -17,12 +17,28 @@ import Checkbox from "expo-checkbox";
 import Button from "../../Components/Button";
 //import {Picker} from '@react-native-picker/picker';
 import CountryPicker from "react-native-country-picker-modal";
+import axios from "axios";
+import { registerUser } from "../../Apis";
 
 const Signup = ({ navigation }) => {
   const [countryCode, setCountryCode] = useState(null);
   const [country, setCountry] = useState(null);
+  const [fullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
+
+  //Conectar con la base de datos
+  const handleRegister = async () => {
+    try {
+      const userData = { fullName, password, phoneNumber };
+      const response = await registerUser(userData); // se llama a la funcion
+      console.log("Registro exitoso:", response);
+      navigation.navigate("Login");
+    } catch (error) {
+      setErrorMessage(error);
+      console.error("Error al registrar:", error);
+    }
+  };
 
   //Guardar la seleccion del Picker
   const [selectedRol, setSelectedRol] = useState("Selecccionar Rol");
@@ -60,7 +76,7 @@ const Signup = ({ navigation }) => {
                 color: COLORS.black,
               }}
             >
-              ¡Conecta con veterinarios hoy!
+              ¡Conecta con veterinarios y agronomos hoy!
             </Text>
           </View>
 
@@ -91,6 +107,8 @@ const Signup = ({ navigation }) => {
                 placeholder="Ingresa tu nombre completo"
                 placeholderTextColor={COLORS.black}
                 keyboardType="email-address"
+                value={fullName}
+                onChangeText={setFullName}
                 style={{
                   width: "100%",
                 }}
@@ -169,6 +187,8 @@ const Signup = ({ navigation }) => {
               <TextInput
                 placeholder="Ingresa tu numero de teléfono"
                 placeholderTextColor={COLORS.black}
+                value={phoneNumber}
+                onChangeText={setPhoneNumber}
                 keyboardType="numeric"
                 style={{
                   width: "80%",
@@ -202,6 +222,8 @@ const Signup = ({ navigation }) => {
             >
               <TextInput
                 placeholder="Ingresa tu contraseña"
+                value={password}
+                onChangeText={setPassword}
                 placeholderTextColor={COLORS.black}
                 secureTextEntry={isPasswordShown}
                 style={{
@@ -290,7 +312,7 @@ const Signup = ({ navigation }) => {
           </View>
 
           <Button
-            onPress={() => navigation.navigate("Login")}
+            onPress={handleRegister}
             title="Registrarse"
             filled
             style={{

@@ -12,7 +12,7 @@ import {
 import CountryPicker from "react-native-country-picker-modal";
 import COLORS from "../../Constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
-//import { SafeAreaView } from 'react-native-web';
+import { loginUser } from "../../Apis";
 
 const Login = ({ navigation }) => {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
@@ -21,6 +21,7 @@ const Login = ({ navigation }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [countryPickerVisible, setCountryPickerVisible] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const onSelectCountry = (selectedCountry) => {
     setCountryCode(selectedCountry.cca2);
@@ -28,10 +29,9 @@ const Login = ({ navigation }) => {
     setCountryPickerVisible(false);
   };
 
-  const handleLogin = () => {
-    navigation.navigate("PerfilUser");
+  const handleLogin = async () => {
+    navigation.navigate("PerfilUser"); // Redirige a la pantalla de perfil
   };
-
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.containerImage}>
